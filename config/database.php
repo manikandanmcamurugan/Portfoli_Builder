@@ -1,8 +1,9 @@
 <?php
-$host = 'localhost';
-$db   = 'portfolio_builder';
-$user = 'root'; // Change to your XAMPP MySQL user
-$pass = '';     // Change to your XAMPP MySQL password
+// Use environment variables if they exist (for production/Docker), otherwise use local XAMPP defaults
+$host = getenv('DB_HOST') ?: 'localhost';
+$db   = getenv('DB_DATABASE') ?: 'portfolio_builder';
+$user = getenv('DB_USERNAME') ?: 'root';
+$pass = getenv('DB_PASSWORD') ?: '';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);

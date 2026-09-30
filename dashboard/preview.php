@@ -20,7 +20,8 @@ $preview_url = "../portfolio/view.php?user=" . $settings['portfolio_slug'];
 
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
     <h1 class="page-title" style="margin: 0;">Live Preview</h1>
-    <div style="display: flex; gap: 10px;">`n        <a href="templates.php" class="btn-primary" style="background: #6c757d; text-decoration: none;"><i class="fas fa-paint-brush"></i> Change Template</a>
+    <div style="display: flex; gap: 10px;">
+        <a href="templates.php" class="btn-primary" style="background: #6c757d; text-decoration: none;"><i class="fas fa-paint-brush"></i> Change Template</a>
         <a href="settings.php" class="btn-primary" style="background: #28a745; text-decoration: none;"><i class="fas fa-globe"></i> Publish</a>
     </div>
 </div>

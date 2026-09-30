@@ -4,12 +4,25 @@ require_once '../config/database.php';
 $slug = $_GET['user'] ?? null;
 if (!$slug) die("Portfolio not found.");
 
+// Start session to check if user is logged in (for preview)
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+$logged_in_user_id = $_SESSION['user_id'] ?? null;
+
 // Get portfolio settings
-$stmt = $pdo->prepare("SELECT * FROM portfolio_settings WHERE portfolio_slug = ? AND is_published = 1");
+$stmt = $pdo->prepare("SELECT * FROM portfolio_settings WHERE portfolio_slug = ?");
 $stmt->execute([$slug]);
 $settings = $stmt->fetch();
 
-if (!$settings) die("Portfolio not found or is currently private.");
+if (!$settings) {
+    die("Portfolio not found.");
+}
+
+// Check if portfolio is private and the logged in user is not the owner
+if (!$settings['is_published'] && $settings['user_id'] != $logged_in_user_id) {
+    die("Portfolio not found or is currently private.");
+}
 
 $user_id = $settings['user_id'];
 $template_id = $settings['template_id'];
